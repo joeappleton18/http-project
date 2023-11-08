@@ -28,6 +28,13 @@ app.get('/about', (req, res) => {
 }
 );
 
+app.use((req, res) => {
+	console.log(req.originalUrl + req.method);
+	res.status(404).render('404', { headers: req.headers, path: { url: req.originalUrl, method: req.method } });
+
+}
+);
+
 server.listen(3000, () => {
 	console.log('listening on *:3000');
 });
