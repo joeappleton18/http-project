@@ -18,6 +18,7 @@ app.get('/', (req, res) => {
 	// for (const x in headers) {
 	// 	console.log(`${x}: ${headers[x]}`);
 	// }
+	console.log(res.socket);
 	res.render('index', { headers: headers });
 }
 );
@@ -29,7 +30,6 @@ app.get('/about', (req, res) => {
 );
 
 app.use((req, res) => {
-	console.log(req.originalUrl + req.method);
 	res.status(404).render('404', { headers: req.headers, path: { url: req.originalUrl, method: req.method } });
 
 }
