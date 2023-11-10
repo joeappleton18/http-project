@@ -4,7 +4,9 @@ const { Server } = require("socket.io");
 const bodyParser = require('body-parser');
 const ejs = require('ejs');
 const cookieParser = require('cookie-parser');
-
+const fs = require('fs');
+const path = require('path');
+const audio = path.join(__dirname, 'glass.mp3');
 
 const app = express();
 const server = http.createServer(app);
@@ -13,7 +15,6 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
 	const headers = req.headers;
@@ -59,7 +60,23 @@ app.use((req, res) => {
 
 io.on('connection', (socket) => {
 	socket.on('chat message', (msg) => {
-		console.log('message: ' + msg);
+
+		const stream = fs.createReadStream(audio, { highWaterMark: 1000 });
+
+
+		stream.on('data', (chunk) => {
+			socket.emit('audioChunk', chunk);
+		});
+
+		stream.on('end', () => {
+			socket.emit('audioEnd');
+		});
+
+		socket.on('disconnect', () => {
+			console.log('Client disconnected');
+			stream.destroy();
+		});
+
 		io.emit('chat message', msg);
 	});
 });

@@ -62,6 +62,8 @@
 </head>
 
 <body>
+	<audio controls></audio>
+
 	<ul id="messages"></ul>
 	<form id="form" action="">
 		<input id="input" autocomplete="off" /><button>Send</button>
@@ -73,6 +75,8 @@
 
 		var form = document.getElementById('form');
 		var input = document.getElementById('input');
+		const audio = document.querySelector('audio');
+		let accumulatedChunks = [];
 
 		form.addEventListener('submit', function (e) {
 			e.preventDefault();
@@ -80,6 +84,17 @@
 				socket.emit('chat message', input.value);
 				input.value = '';
 			}
+		});
+
+		socket.on('audioChunk', (chunk) => {
+			accumulatedChunks.push(chunk);
+		});
+
+		socket.on('audioEnd', () => {
+			const blob = new Blob(accumulatedChunks, { type: 'audio/mp3' });
+			audio.src = URL.createObjectURL(blob);
+			audio.play();
+			//audio.pause();
 		});
 
 		socket.on('chat message', function (msg) {
