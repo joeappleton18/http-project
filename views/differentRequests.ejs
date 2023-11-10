@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HTTP Methods</title>
+	<style>
+		body {
+			font-family: 'Arial', sans-serif;
+			line-height: 1.6;
+			margin: 20px;
+			padding: 20px;
+			background-color: #f4f4f4;
+			color: #333;
+		}
+
+		h1 {
+			color: #0066cc;
+		}
+
+		h2 {
+			color: #009900;
+		}
+
+		p {
+			margin-bottom: 15px;
+		}
+
+		ul,
+		ol {
+			margin-bottom: 15px;
+			margin-left: 30px;
+		}
+
+		dl {
+			margin-bottom: 15px;
+		}
+
+		dt {
+			font-weight: bold;
+			color: #cc0000;
+			margin-top: 10px;
+		}
+
+		dd {
+			margin-bottom: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>HTTP Methods</h1>
+	<p>HTTP (Hypertext Transfer Protocol) defines several methods, or verbs, that indicate the desired action to be
+		performed on a resource. Each HTTP request typically uses one of these methods:</p>
+
+	<ul>
+		<li><strong>GET:</strong> Retrieve data from the server. It should have no other effect on the data.
+		</li>
+		<li><strong>POST:</strong> Submit data to be processed to a specified resource. It is often used when
+			uploading a file or submitting a form.</li>
+		<li><strong>PUT:</strong> Update a resource on the server. It replaces the existing resource or creates
+			a new one if it doesn't exist.</li>
+		<li><strong>DELETE:</strong> Request that a resource be removed. It should be used cautiously because it
+			deletes the specified resource.</li>
+		<li><strong>PATCH:</strong> Apply partial modifications to a resource. It is used to update a resource
+			with new data.</li>
+		<li><strong>HEAD:</strong> Similar to GET, but it requests only the headers of the resource without the
+			actual data. It is often used to check for the existence of a resource.</li>
+		<li><strong>OPTIONS:</strong> Used to describe the communication options for the target resource. It
+			allows the client to determine the options and/or requirements associated with a resource.</li>
+		<li><strong>TRACE:</strong> Echoes the received request so that a client can see what changes or
+			additions have been made by intermediate servers.</li>
+		<li><strong>CONNECT:</strong> Converts the request connection to a transparent TCP/IP tunnel, usually to
+			facilitate SSL-encrypted communication (HTTPS) through an unencrypted HTTP proxy.</li>
+	</ul>
+
+	<h2>GET</h2>
+	<p>GET requests are used to retrieve data from the server. They should have no other effect on the data.</p>
+	<form action="/differentRequests" method="GET">
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name">
+		<button type="submit">Send GET Request</button>
+	</form>
+
+	<h2>POST</h2>
+	<p>POST requests are used to submit data to be processed to a specified resource. They are often used when
+		uploading a file or submitting a form.</p>
+	<form action="/differentRequests" method="POST">
+		<label for="name">Name:</label>
+		<input type="text" name="name" id="name">
+		<button type="submit">Send POST Request</button>
+	</form>
+
+	<h1>HTTP Responses</h1>
+	<p>HTTP (Hypertext Transfer Protocol) responses provide information about the status of a request made to a
+		server. The
+		response is conveyed through a three-digit status code and an optional message. Here are some common
+		HTTP
+		responses:</p>
+
+	<ul>
+		<li><strong>1xx (Informational):</strong> The request was received, continuing process.</li>
+		<li><strong>2xx (Success):</strong> The request was successfully received, understood, and accepted.
+		</li>
+		<li><strong>3xx (Redirection):</strong> Further action needs to be taken in order to complete the
+			request.</li>
+		<li><strong>4xx (Client Error):</strong> The request contains bad syntax or cannot be fulfilled by the
+			server.
+		</li>
+		<li><strong>5xx (Server Error):</strong> The server failed to fulfill a valid request.</li>
+	</ul>
+
+	<h2>Common Status Codes:</h2>
+	<dl>
+		<dt><strong>200 OK:</strong></dt>
+		<dd>The request was successful, and the server has returned the requested data.</dd>
+
+		<dt><strong>201 Created:</strong></dt>
+		<dd>The request was successful, and a new resource was created as a result.</dd>
+
+		<dt><strong>204 No Content:</strong></dt>
+		<dd>The server successfully processed the request but there is no content to send back.</dd>
+		<dt><strong>300 Moved:</strong></dt>
+		<dd>The requested resource has been moved to another location temporarily.</dd>
+		
+		<dt><strong>301 Permanently Moved:</strong></dt>
+		<dd>The requested resource has been permanently moved to another location.</dd>
+
+
+		<dt><strong>400 Bad Request:</strong></dt>
+		<dd>The request could not be understood or was missing required parameters.</dd>
+
+		<dt><strong>401 Unauthorized:</strong></dt>
+		<dd>The request requires user authentication or the authentication failed.</dd>
+
+		<dt><strong>404 Not Found:</strong></dt>
+		<dd>The requested resource could not be found on the server.</dd>
+
+		<dt><strong>500 Internal Server Error:</strong></dt>
+		<dd>The server encountered an unexpected condition that prevented it from fulfilling the request.</dd>
+		  <dt><strong>300 Moved:</strong></dt>
+        <dd>The requested resource has been moved to another location temporarily.</dd>
+
+        <dt><strong>301 Permanently Moved:</strong></dt>
+        <dd>The requested resource has been permanently moved to another location.</dd>
+
+	</dl>
+
+	<p>These status codes and responses help in understanding the outcome of an HTTP request and provide guidance on
+		how to
+		proceed.</p>
+
+</body>
+
+</html>
