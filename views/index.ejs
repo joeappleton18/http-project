@@ -11,6 +11,10 @@
 <body>
 	<h1> Joe's Chat Application </h1>
 	<%- include('partials/HTTPRequestPrint', {headers: headers}) %>
+		<script src="../node_modules/socket.io/client-dist/socket.io.js"></script>
+		<script>
+			var socket = io();
+		</script>
 </body>
 
 </html>
