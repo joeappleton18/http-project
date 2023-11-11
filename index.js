@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
+app.use(express.static('public'));
 app.get('/', (req, res) => {
 	const headers = req.headers;
 	// console.log(headers);
@@ -50,6 +50,11 @@ app.post('/differentRequests', (req, res) => {
 	res.send(req.body);
 
 });
+
+
+app.get('/grid', (req, res) => {
+	res.render('grid');
+})
 
 app.use((req, res) => {
 	res.status(404).render('404', { headers: req.headers, path: { url: req.originalUrl, method: req.method } });

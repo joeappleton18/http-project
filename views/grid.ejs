@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>The Tracker</title>
+</head>
+
+<body>
+
+
+	<button id="addData">Add Data</button>
+
+	<canvas id="myChart"></canvas>
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script>
+		const ctx = document.getElementById('myChart');
+		const btn = document.getElementById('addData');
+		var socket = io();
+
+
+		const data = {
+			datasets: [{
+				label: '',
+				data: [],
+				backgroundColor: 'rgb(255, 99, 132)'
+			}],
+		};
+
+		const config = {
+			type: 'scatter',
+			data: data,
+			options: {
+				tooltips: {
+					callbacks: {
+						label: function (tooltipItem, data) {
+							// Get the custom tooltip from the data
+							console.log(tooltipItem);
+							var customTooltip = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].customTooltip;
+							return customTooltip;
+						}
+					}
+				},
+				scales: {
+					x: {
+						display: false
+					},
+					y: {
+						display: false
+					}
+
+				}
+			}
+		};
+
+		const chart = new Chart(ctx, config);
+
+		btn.addEventListener('click', function () {
+			chart.data.datasets.forEach((dataset) => {
+				dataset.data.push({
+					x: Math.random() * 10,
+					y: Math.random() * 10,
+					customTooltip: 'Custom Tooltip 3'
+				});
+			});
+			chart.update();
+		});
+	</script>
+</body>
+
+</html>
