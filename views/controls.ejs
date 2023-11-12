@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Control Audio</title>
 </head>
+
 <body>
 
 	<button id="play">Play</button>
 	<button id="pause">Pause</button>
 
-	
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+		var socket = io();
+		const play = document.getElementById('play');
+
+		play.addEventListener('click', function () {
+			console.log('play clicked');
+			socket.emit('play');
+		});
+	</script>
 </body>
+
 </html>

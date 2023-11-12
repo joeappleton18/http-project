@@ -52,6 +52,10 @@ app.post('/differentRequests', (req, res) => {
 });
 
 
+app.get('/controls', (req, res) => {
+	res.render('controls');
+})
+
 app.get('/grid', (req, res) => {
 	res.render('grid');
 })
@@ -65,16 +69,21 @@ app.use((req, res) => {
 
 io.on('connection', (socket) => {
 	socket.on('chat message', (msg) => {
+		io.emit('chat message', msg);
+	});
 
+	socket.on('play', () => {
+		console.log('sending audio');
 		const stream = fs.createReadStream(audio, { highWaterMark: 1000 });
 
-
 		stream.on('data', (chunk) => {
-			socket.emit('audioChunk', chunk);
+			console.log('sending chunk');
+			io.emit('audioChunk', chunk);
 		});
 
 		stream.on('end', () => {
-			socket.emit('audioEnd');
+			console.log('sending end');
+			io.emit('audioEnd');
 		});
 
 		socket.on('disconnect', () => {
@@ -82,7 +91,6 @@ io.on('connection', (socket) => {
 			stream.destroy();
 		});
 
-		io.emit('chat message', msg);
 	});
 });
 

@@ -87,6 +87,7 @@
 		});
 
 		socket.on('audioChunk', (chunk) => {
+			console.log('chunk received');
 			accumulatedChunks.push(chunk);
 		});
 
@@ -94,7 +95,13 @@
 			const blob = new Blob(accumulatedChunks, { type: 'audio/mp3' });
 			audio.src = URL.createObjectURL(blob);
 			audio.play();
-			//audio.pause();
+
+			setInterval(function () {
+				audio.pause();
+				audio.currentTime = 0;
+			}, 6000);  // 10 seconds in milliseconds
+
+
 		});
 
 		socket.on('chat message', function (msg) {
