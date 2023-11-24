@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const path = require('path');
 const audio = path.join(__dirname, 'glass.mp3');
+const sqlite3 = require('sqlite3').verbose();
+let db = new sqlite3.Database(':memory:');
 
 const app = express();
 const server = http.createServer(app);
@@ -59,6 +61,21 @@ app.get('/controls', (req, res) => {
 app.get('/grid', (req, res) => {
 	res.render('grid');
 })
+
+app.get('/input', (req, res) => {
+
+	res.render('input', { data: "" });
+});
+
+app.post('/input', (req, res) => {
+
+	const data = req.body;
+
+	console.log(data);
+
+	res.render('input', { data: data });
+
+});
 
 app.use((req, res) => {
 	res.status(404).render('404', { headers: req.headers, path: { url: req.originalUrl, method: req.method } });

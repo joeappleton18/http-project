@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Enter Some Text</title>
+</head>
+
+<body>
+	<p> the escaped output of the data is <%= data.text %>
+	</p>
+
+	<p> the unescaped output of the data is <%- data.text %></p>
+	<form method="POST">
+
+		<label for="text">Enter some text</label>
+		<textarea name="text" id="text" cols="30" rows="10"></textarea>
+		<button type="submit">Submit</button>
+	</form>
+
+</body>
+
+</html>
